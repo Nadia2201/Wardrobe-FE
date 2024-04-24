@@ -23,7 +23,7 @@ struct HomePageView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 400, height: 400)
-                    .accessibilityIdentifier("StyleSyncLogo")
+                    .accessibilityIdentifier("style-sync-logo")
                 
                 Spacer()
             

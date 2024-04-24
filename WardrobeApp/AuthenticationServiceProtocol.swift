@@ -5,4 +5,7 @@
 //  Created by Nadia Bourial on 23/04/2024.
 //
 
-import Foundation
+public protocol AuthenticationServiceProtocol {
+    func signUp(user: User) async throws
+    func login(user: User, completion: @escaping (Result<String, Error>) -> Void)
+}
