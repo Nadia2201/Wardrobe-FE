@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C58EDC2BDA5C270028C601 /* ProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C58EDB2BDA5C270028C601 /* ProfilePageView.swift */; };
 		B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B62BD9033F0023A558 /* HomePageView.swift */; };
 		B10F77B92BD90BF90023A558 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B82BD90BF90023A558 /* SignUpView.swift */; };
 		B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77BA2BD9106D0023A558 /* LoginView.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04C58EDB2BDA5C270028C601 /* ProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageView.swift; sourceTree = "<group>"; };
 		B10F77B62BD9033F0023A558 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		B10F77B82BD90BF90023A558 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B10F77BA2BD9106D0023A558 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				B10F77B82BD90BF90023A558 /* SignUpView.swift */,
 				B10F77BA2BD9106D0023A558 /* LoginView.swift */,
 				B10F77BC2BD91DE30023A558 /* DashboardView.swift */,
+				04C58EDB2BDA5C270028C601 /* ProfilePageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1AFB6392BD7EB08007458E3 /* ContentView.swift in Sources */,
+				04C58EDC2BDA5C270028C601 /* ProfilePageView.swift in Sources */,
 				B1AFB6672BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift in Sources */,
 				B1AFB6372BD7EB08007458E3 /* WardrobeAppApp.swift in Sources */,
 				B10F77B92BD90BF90023A558 /* SignUpView.swift in Sources */,
