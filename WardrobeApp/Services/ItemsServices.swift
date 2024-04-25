@@ -64,6 +64,7 @@ class ItemService : ItemServiceProtocol {
             "image": image,
             "tags": tags
         ]
+        print(payload)
         let url = URL(string: "http://localhost:3000/items")!
 
         var request = URLRequest(url: url)
