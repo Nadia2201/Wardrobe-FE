@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-public struct Item: Decodable {
+public struct Item: Decodable, Identifiable {
+    public let id: String //unique identifier
     var name: String
     var category: String
     var tags: [String]
@@ -19,6 +20,7 @@ public struct Item: Decodable {
             case category
             case tags
             case image
+            case id
         }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -26,5 +28,13 @@ public struct Item: Decodable {
         category = try container.decode(String.self, forKey: .category)
         tags = try container.decode([String].self, forKey: .tags)
         image = try container.decode(String.self, forKey: .image)
+        id = try container.decode(String.self, forKey: .id)
     }
+    
+    public var uiImage: UIImage? {
+             guard let imageData = Data(base64Encoded: image) else {
+                 return nil
+             }
+             return UIImage(data: imageData)
+         }
 }

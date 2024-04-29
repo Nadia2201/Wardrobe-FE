@@ -8,16 +8,31 @@
 import SwiftUI
 
 struct WardrobeView: View {
-    var body: some View {
-//        Image("StyleSyncLogo")
-//            .resizable()
-//            .scaledToFit()
-//            .frame(width: 120, height: 120)
-//            .accessibilityIdentifier("style-sync-logo")
-        Text("This is your wardrobe")
-    }
-}
+    @ObservedObject var viewModel = ItemsViewModel() //observedObject to track changes
 
-#Preview {
-    WardrobeView()
+         var body: some View {
+             List(viewModel.items) { item in
+                 HStack {
+                     if let image = item.uiImage {
+                         Image(uiImage: image)
+                             .resizable()
+                             .scaledToFit()
+                             .frame(width: 50, height: 50) 
+                     }
+                     VStack(alignment: .leading) {
+                         Text("Name: \(item.name)")
+                         Text("Category: \(item.category)")
+                         Text("Tags: \(item.tags.joined(separator: ", "))")
+                     }
+                 }
+             }
+             .onAppear{
+                 viewModel.fetchItems() //fetch items when the view appears
+             }
+         }
+     }
+struct WardrobeView_Previews: PreviewProvider {
+    static var previews: some View {
+        WardrobeView()
+    }
 }

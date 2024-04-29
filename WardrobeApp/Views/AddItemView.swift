@@ -118,7 +118,7 @@ struct AddItemView: View {
                         // Compress the image
                         if let compressedImage = selectedImage.compressedImage() {
                             // Convert the compressed image to data
-                            if let compressedImageData = compressedImage.jpegData(compressionQuality: 0.5) {
+                            if let compressedImageData = compressedImage.jpegData(compressionQuality: 0.2) {
 //                                 Convert compressed image data to base64
                                 let imageConverted = compressedImageData.base64EncodedString()
 

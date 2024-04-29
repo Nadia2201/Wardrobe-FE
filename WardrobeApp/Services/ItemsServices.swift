@@ -25,7 +25,10 @@ class ItemService : ItemServiceProtocol {
             return
         }
         var request = URLRequest(url: url)
-
+        
+        request.httpMethod = "GET"
+        request.timeoutInterval = 30
+        
         guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
                 print("Token not found")
                 return
@@ -37,20 +40,35 @@ class ItemService : ItemServiceProtocol {
         print(token)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error fetching items: \(error?.localizedDescription ?? "Unknown error")")
+//            guard let data = data, error == nil else {
+//                print("Error fetching items: \(error?.localizedDescription ?? "Unknown error")")
+            if let error = error {
+                if(error as NSError).domain == NSURLErrorDomain, (error as NSError).code == NSURLErrorTimedOut {
+                        print("Request timed out")
+                    } else {
+                        print("Network error", error.localizedDescription)
+                             }
+                             completion([])
+                             return
+                         }
+
+                guard let data = data else {
+                             print("No data returned")
+            
                 return
             }
 
             do {
-                let decodedResponse = try JSONDecoder().decode(ItemResponse.self, from: data)
+                let decodedResponse = try JSONDecoder().decode([Item].self, from: data)
                 // Update token in UserDefaults with the new token received from backend
-                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
-                print("UPDATED TOKEN BELOW")
-                print(decodedResponse.token)
+//                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
+//                print("UPDATED TOKEN BELOW")
+                
                 DispatchQueue.main.async {
-                    completion(decodedResponse.items)
+                    completion(decodedResponse)
                 }
+                print("decoded response:")
+                print(decodedResponse)
             } catch {
                 print("Error decoding JSON: \(error)")
             }
