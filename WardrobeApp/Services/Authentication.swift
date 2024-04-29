@@ -69,8 +69,11 @@ class AuthenticationService: AuthenticationServiceProtocol {
                         if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String], let token = json["token"] {
         
                             UserDefaults.standard.set(token, forKey: "accessToken") // setting the token in the env
+                            let username = json["email"]
+                            UserDefaults.standard.set(username, forKey: "accessUsername") //setting hte username in the env
                             
                             completion(.success(token)) // returning the value of the token
+                            completion(.success(username ?? "Guest"))
                         } else {
                             completion(.failure(NSError(domain: "WardrobeApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response from the server"])))
                         }

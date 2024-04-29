@@ -15,12 +15,14 @@ public struct Item: Decodable, Identifiable {
     var tags: [String]
     var image: String
     
+    
     private enum CodingKeys: String, CodingKey {
             case name
             case category
             case tags
             case image
             case id
+            
         }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

@@ -109,4 +109,11 @@ class ItemService : ItemServiceProtocol {
           throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode) when signing up. Expected 201"])
         }
       }
+    
+    
+    func favouriteItem(item: Item, completion: @escaping (Bool) -> Void) {
+                // Toggle the favorite status
+        let newFavoriteStatus = !item.favourite
+      
+    }
 }

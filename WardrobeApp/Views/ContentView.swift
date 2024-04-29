@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-   
+    @State private var isLoggedIn = true
     var body: some View {
         TabView {
                 DashboardView()
@@ -35,6 +35,11 @@ struct ContentView: View {
                     .tabItem {
                         Image(systemName: "door.left.hand.open")
                         Text("Logout")
+                    }
+                    .onTapGesture {
+                    // Delete the token and log out
+                    UserDefaults.standard.removeObject(forKey: "token")
+                    isLoggedIn = false
                     }
             }
         }

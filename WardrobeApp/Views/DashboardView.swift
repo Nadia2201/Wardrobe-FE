@@ -15,8 +15,9 @@ struct DashboardView: View {
         ["title": "occasion", "listOfCriteria": ["casual", "smart", "sporty", "partywear"]],
         ["title": "weather", "listOfCriteria": ["summer", "winter", "rainy", "warm"]]
     ]
+    let username = UserDefaults.standard.string(forKey: "accessUsername") ?? "Guest"
     var body: some View {
-        let username = UserDefaults.standard.string(forKey: "email") ?? "Guest"
+        
         
         VStack{
             Image("StyleSyncLogo")
