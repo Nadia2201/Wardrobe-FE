@@ -35,16 +35,15 @@ struct AddItemView: View {
     @State private var itemCategory = "Top"
     @State private var item: Item?
     @State private var isItemAdded = false
+    @State private var clearFields = false
     let listOfCriteria = [
         ["title": "occasion", "listOfCriteria": ["casual", "smart", "sporty", "partywear"]],
-        ["title": "colour", "listOfCriteria": ["red", "black", "blue", "white", "green", "pink"]],
         ["title": "weather", "listOfCriteria": ["summer", "winter", "rainy", "warm"]]
     ]
     
     
     
     var body: some View {
-        NavigationView {
             VStack {
                 Image("StyleSyncLogo")
                     .resizable()
@@ -66,13 +65,13 @@ struct AddItemView: View {
                     Image(uiImage: selectedImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding()
+//                        .padding()
                 }
                 TextField("Item Name", text: $itemName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Picker("Category", selection: $itemCategory) {
-                    ForEach(["Top", "Bottom", "Shoes"], id: \.self) {
+                    ForEach(["Top", "Dress", "Bottom", "Shoes"], id: \.self) {
                         Text($0)
                     }
                 }
@@ -81,7 +80,7 @@ struct AddItemView: View {
                 
                 Text("Select tags that describe your item")
                     .multilineTextAlignment(.leading)
-                    .padding()
+                //                    .padding()
                 
                 List {
                     ForEach(0..<listOfCriteria.count) { index in
@@ -120,16 +119,15 @@ struct AddItemView: View {
                         if let compressedImage = selectedImage.compressedImage() {
                             // Convert the compressed image to data
                             if let compressedImageData = compressedImage.jpegData(compressionQuality: 0.5) {
-                                // Convert compressed image data to base64
+//                                 Convert compressed image data to base64
                                 let imageConverted = compressedImageData.base64EncodedString()
-                                print(imageConverted)
-                                
+
                                 Task {
                                     do {
                                         let itemService = ItemService()
-                                        try await
-                                        itemService.createItem(name: itemName, category: itemCategory, image: imageConverted ?? "", tags: Array(selectedCriteria))
+                                            try await itemService.createItem(name: itemName, category: itemCategory, image: imageConverted, tags: Array(selectedCriteria))
                                         isItemAdded = true
+                                        clearFields = true
                                     } catch {
                                         print(error.localizedDescription)
                                     }
@@ -144,73 +142,87 @@ struct AddItemView: View {
                     }
                     
                 }
-//                .alert(isPresented: $isItemAdded) {
-//                    Alert(title: Text("Item added to your wardrobe"), dismissButton: .default(Text("OK")))
-//                }
-                NavigationLink(destination: DashboardView(), isActive: $isItemAdded) {
-                    EmptyView()
+                .alert(isPresented: $isItemAdded) {
+                    Alert(title: Text("Item added to your wardrobe"),
+                          dismissButton: .default(Text("OK")))
                 }
-                .hidden()
+                //                NavigationLink(
+                //                    destination: DashboardView(),
+                //                    isActive: $isItemAdded)
+//                {
+//                    EmptyView()
+//                }
+//                .hidden()
+                
+                .onChange(of: clearFields) { value in
+                    if value {
+                        selectedImage = nil
+                        itemName = ""
+                        itemCategory = "Top"
+                        selectedCriteria = []
+                        clearFields = false
+                    }
+                }
             }
         }
-    }
-
-    struct ImagePicker: View {
-        @Binding var selectedImage: UIImage?
-        @State private var isShowingImagePicker = false
-        @Environment(\.presentationMode) private var presentationMode
-        
-        var body: some View {
-            VStack {
-                Button("Select an image") {
-                    isShowingImagePicker = true
+    
+        struct ImagePicker: View {
+            @Binding var selectedImage: UIImage?
+            @State private var isShowingImagePicker = false
+            @Environment(\.presentationMode) private var presentationMode
+            
+            var body: some View {
+                VStack {
+                    Button("Select an image") {
+                        isShowingImagePicker = true
+                    }
+                    .padding()
+                    .sheet(isPresented: $isShowingImagePicker) {
+                        ImagePickerViewController(selectedImage: $selectedImage, presentationMode: _presentationMode)
+                    }
+                    
+                    Spacer()
                 }
-                .padding()
-                .sheet(isPresented: $isShowingImagePicker) {
-                    ImagePickerViewController(selectedImage: $selectedImage, presentationMode: _presentationMode)
+            }
+        }
+        
+        struct ImagePickerViewController: UIViewControllerRepresentable {
+            @Binding var selectedImage: UIImage?
+            @Environment(\.presentationMode) var presentationMode
+            
+            func makeUIViewController(context: Context) -> some UIViewController {
+                let viewController = UIViewController()
+                let imagePickerController = UIImagePickerController()
+                imagePickerController.delegate = context.coordinator
+                imagePickerController.sourceType = .photoLibrary
+                viewController.present(imagePickerController, animated: true, completion: nil)
+                return viewController
+            }
+            
+            func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+            
+            func makeCoordinator() -> Coordinator {
+                return Coordinator(parent: self)
+            }
+            
+            class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+                let parent: ImagePickerViewController
+                
+                init(parent: ImagePickerViewController) {
+                    self.parent = parent
                 }
                 
-                Spacer()
-            }
-        }
-    }
-    
-    struct ImagePickerViewController: UIViewControllerRepresentable {
-        @Binding var selectedImage: UIImage?
-        @Environment(\.presentationMode) var presentationMode
-        
-        func makeUIViewController(context: Context) -> some UIViewController {
-            let viewController = UIViewController()
-            let imagePickerController = UIImagePickerController()
-            imagePickerController.delegate = context.coordinator
-            imagePickerController.sourceType = .photoLibrary
-            viewController.present(imagePickerController, animated: true, completion: nil)
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
-        
-        func makeCoordinator() -> Coordinator {
-            return Coordinator(parent: self)
-        }
-        
-        class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-            let parent: ImagePickerViewController
-            
-            init(parent: ImagePickerViewController) {
-                self.parent = parent
-            }
-            
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                if let image = info[.originalImage] as? UIImage {
-                    parent.selectedImage = image
+                func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                    if let image = info[.originalImage] as? UIImage {
+                        parent.selectedImage = image
+                    }
+                    parent.presentationMode.wrappedValue.dismiss()
                 }
-                parent.presentationMode.wrappedValue.dismiss()
             }
         }
+        
     }
-    
-}
+
     struct AddItemView_Previews: PreviewProvider {
         static var previews: some View {
             AddItemView()

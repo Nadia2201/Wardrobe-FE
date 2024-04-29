@@ -52,7 +52,7 @@ struct LoginView: View {
                 .foregroundColor(.white)
                 .font(.headline)
                 .cornerRadius(8)
-                NavigationLink(destination: DashboardView(), isActive: $loggedIn) {
+                NavigationLink(destination: ContentView(), isActive: $loggedIn) {
                     EmptyView()
                 }
                 .hidden()
