@@ -10,4 +10,5 @@ import UIKit
 public protocol ItemServiceProtocol {
     func fetchItems(completion: @escaping ([Item]) -> Void) -> Void
     func createItem(name: String, category: String, image: String, tags: [String]) async throws -> Void
+    func favouriteItem(item: Item, completion: @escaping (Bool) -> Void)
 }
