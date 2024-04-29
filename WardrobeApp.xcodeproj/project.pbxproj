@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C97B7A2BDCF7D700E18907 /* CreateOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C97B792BDCF7D700E18907 /* CreateOutfitView.swift */; };
+		04C97B7C2BDD054300E18907 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C97B7B2BDD054300E18907 /* ItemsViewModel.swift */; };
 		B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B62BD9033F0023A558 /* HomePageView.swift */; };
 		B10F77B92BD90BF90023A558 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B82BD90BF90023A558 /* SignUpView.swift */; };
 		B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77BA2BD9106D0023A558 /* LoginView.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04C97B792BDCF7D700E18907 /* CreateOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOutfitView.swift; sourceTree = "<group>"; };
+		04C97B7B2BDD054300E18907 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
 		B10F77B62BD9033F0023A558 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		B10F77B82BD90BF90023A558 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B10F77BA2BD9106D0023A558 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				B10F77BA2BD9106D0023A558 /* LoginView.swift */,
 				B1A4B28F2BDA73EB00120764 /* AddItemView.swift */,
 				B10F77BC2BD91DE30023A558 /* DashboardView.swift */,
+				04C97B792BDCF7D700E18907 /* CreateOutfitView.swift */,
+				04C97B7B2BDD054300E18907 /* ItemsViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,7 +331,9 @@
 				B1A4B28E2BDA730600120764 /* ItemsServices.swift in Sources */,
 				B1A4B28A2BDA72A900120764 /* Item.swift in Sources */,
 				B1AFB6392BD7EB08007458E3 /* ContentView.swift in Sources */,
+				04C97B7A2BDCF7D700E18907 /* CreateOutfitView.swift in Sources */,
 				B1AFB6672BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift in Sources */,
+				04C97B7C2BDD054300E18907 /* ItemsViewModel.swift in Sources */,
 				B1A4B2902BDA73EB00120764 /* AddItemView.swift in Sources */,
 				B1AFB6372BD7EB08007458E3 /* WardrobeAppApp.swift in Sources */,
 				B1A4B28C2BDA72D400120764 /* ItemServiceProtocol.swift in Sources */,

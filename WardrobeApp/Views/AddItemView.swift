@@ -40,8 +40,6 @@ struct AddItemView: View {
         ["title": "weather", "listOfCriteria": ["summer", "winter", "rainy", "warm"]]
     ]
     
-    
-    
     var body: some View {
         VStack {
             Image("StyleSyncLogo")
@@ -111,24 +109,26 @@ struct AddItemView: View {
             }
             .padding()
             Button("Add to my wardrobe") {
-                //                             Create an Item object
+
+                // Create an Item object
                 // convert UIImage to base64
                 if let selectedImage = selectedImage {
-                    // Compress the image
+//                    // Compress the image
                     if let compressedImage = selectedImage.compressedImage() {
-                        // Convert the compressed image to data
-                        if let compressedImageData = compressedImage.jpegData(compressionQuality: 0.5) {
-                            // Convert compressed image data to base64
+//                        // Convert the compressed image to data
+                        if let compressedImageData = compressedImage.jpegData(compressionQuality: 0.2) {
+//                            // Convert compressed image data to base64
                             let imageConverted = compressedImageData.base64EncodedString()
-                            print(imageConverted)
-                            
+                                
+                                print(imageConverted)
+//                            
                             Task {
                                 do {
                                     let itemService = ItemService()
                                     try await
-                                    itemService.createItem(name: itemName, category: itemCategory, image: imageConverted ?? "", tags: Array(selectedCriteria))
+                                    itemService.createItem(name: itemName, category: itemCategory, image: imageConverted, tags: Array(selectedCriteria))
+                                    }
                                 }
-                            }
                             
                         } else {
                             print("No image selected")

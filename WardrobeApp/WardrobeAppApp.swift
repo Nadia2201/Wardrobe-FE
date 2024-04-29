@@ -12,6 +12,7 @@ struct WardrobeAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            CreateOutfitView()
         }
     }
 }

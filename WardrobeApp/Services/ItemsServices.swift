@@ -24,32 +24,57 @@ class ItemService : ItemServiceProtocol {
             return
         }
         var request = URLRequest(url: url)
-
-        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
-                print("Token not found")
-                return
-            }
+        request.httpMethod = "GET"
+        request.timeoutInterval = 30
         
+        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+            print("Token not found")
+            return
+        }
 
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         print("OLD TOKEN BELOW")
         print(token)
 
+        print("Hello from ItemsServices 1")
+        print("Request URL:", request.url?.absoluteString ?? "N/A")
+        print("HTTP Method:", request.httpMethod ?? "N/A")
+        print("Headers:", request.allHTTPHeaderFields ?? [:])
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error fetching items: \(error?.localizedDescription ?? "Unknown error")")
+    
+            if let error = error {
+                if(error as NSError).domain == NSURLErrorDomain, (error as NSError).code == NSURLErrorTimedOut {
+                    print("Request timed out")
+                } else {
+                    print("Network error", error.localizedDescription)
+                }
+                completion([])
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
                 return
             }
 
+            print("Hello from ItemsServices 2")
             do {
-                let decodedResponse = try JSONDecoder().decode(ItemResponse.self, from: data)
-                // Update token in UserDefaults with the new token received from backend
-                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
-                print("UPDATED TOKEN BELOW")
-                print(decodedResponse.token)
+                print("Hello from ItemsServices 3")
+//                let decodedResponse = try JSONDecoder().decode(ItemResponse.self, from: data)
+                let decodedResponse = try JSONDecoder().decode([Item].self, from: data)
                 DispatchQueue.main.async {
-                    completion(decodedResponse.items)
+                    completion(decodedResponse)
                 }
+                
+                print(decodedResponse)
+                // Update token in UserDefaults with the new token received from backend
+//                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
+//                print("UPDATED TOKEN BELOW")
+//                print(decodedResponse.token)
+//                DispatchQueue.main.async {
+//                    completion(decodedResponse.items)
+//                }
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -75,6 +100,7 @@ class ItemService : ItemServiceProtocol {
                 return
             }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
         let jsonData = try JSONSerialization.data(withJSONObject: payload)
         request.httpBody = jsonData
 
