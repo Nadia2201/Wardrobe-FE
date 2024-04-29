@@ -15,6 +15,8 @@
 		B1A4B28C2BDA72D400120764 /* ItemServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */; };
 		B1A4B28E2BDA730600120764 /* ItemsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28D2BDA730600120764 /* ItemsServices.swift */; };
 		B1A4B2902BDA73EB00120764 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28F2BDA73EB00120764 /* AddItemView.swift */; };
+		B1AA45F72BDF93B600EAD569 /* WardrobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */; };
+		B1AA45F92BDF940C00EAD569 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */; };
 		B1AFB6372BD7EB08007458E3 /* WardrobeAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AFB6362BD7EB08007458E3 /* WardrobeAppApp.swift */; };
 		B1AFB6392BD7EB08007458E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AFB6382BD7EB08007458E3 /* ContentView.swift */; };
 		B1AFB63B2BD7EB0A007458E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1AFB63A2BD7EB0A007458E3 /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 		B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemServiceProtocol.swift; sourceTree = "<group>"; };
 		B1A4B28D2BDA730600120764 /* ItemsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsServices.swift; sourceTree = "<group>"; };
 		B1A4B28F2BDA73EB00120764 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeView.swift; sourceTree = "<group>"; };
+		B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		B1AFB6332BD7EB08007458E3 /* WardrobeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WardrobeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1AFB6362BD7EB08007458E3 /* WardrobeAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeAppApp.swift; sourceTree = "<group>"; };
 		B1AFB6382BD7EB08007458E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				B10F77BA2BD9106D0023A558 /* LoginView.swift */,
 				B1A4B28F2BDA73EB00120764 /* AddItemView.swift */,
 				B10F77BC2BD91DE30023A558 /* DashboardView.swift */,
+				B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */,
+				B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				B1AFB6692BD7EE13007458E3 /* Authentication.swift in Sources */,
 				B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */,
 				B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */,
+				B1AA45F72BDF93B600EAD569 /* WardrobeView.swift in Sources */,
+				B1AA45F92BDF940C00EAD569 /* FavouritesView.swift in Sources */,
 				B1AFB6652BD7ED4E007458E3 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
