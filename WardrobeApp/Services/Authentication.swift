@@ -71,8 +71,8 @@ class AuthenticationService: AuthenticationServiceProtocol {
                             UserDefaults.standard.set(token, forKey: "accessToken") // setting the token in the env
                             let username = json["email"]
                             UserDefaults.standard.set(username, forKey: "accessUsername") //setting hte username in the env
-                            let userId = json["userId"]
-                            UserDefaults.standard.set(userId, forKey: "userId")
+//                            let userId = json["userId"]
+//                            UserDefaults.standard.set(userId, forKey: "userId")
                             completion(.success(token)) // returning the value of the token
 
 //                            print(userId)

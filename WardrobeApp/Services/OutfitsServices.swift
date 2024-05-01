@@ -85,32 +85,33 @@ class OutfitService : OutfitServiceProtocol {
     
     
     func createOutfitByTag(occasion: String, weather: String) async throws -> Void {
-        let payload: [String: String] = ["occasion": occasion, "weather": weather]
-        print(payload)
-        let url = URL(string: "http://localhost:3000/outfits/createByTag")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
-                print("Token not found")
-                return
+            let payload: [String: String] = ["occasion": occasion, "weather": weather]
+//            let payload: [String] = [occasion, weather]
+            print(payload)
+            let url = URL(string: "http://localhost:3000/outfits/createByTag")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+                    print("Token not found")
+                    return
+                }
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            let jsonData = try JSONSerialization.data(withJSONObject: payload)
+            request.httpBody = jsonData
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+              throw NSError(domain: "InvalidResponse", code: 0, userInfo: nil)
             }
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        let jsonData = try JSONSerialization.data(withJSONObject: payload)
-        request.httpBody = jsonData
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-          throw NSError(domain: "InvalidResponse", code: 0, userInfo: nil)
+            if httpResponse.statusCode == 201 {
+                print("status code 201")
+                return
+            } else {
+                throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode). Expected 201"])
+            }
         }
-        if httpResponse.statusCode == 201 {
-            print("status code 201")
-            return
-        } else {
-            throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode). Expected 201"])
-        }
-    }
     
     func createOutfitManually(top: String, bottom: String, shoes: String) async throws -> Void {
         let payload: [String: String] = ["top": top, "bottom": bottom, "shoes": shoes]
