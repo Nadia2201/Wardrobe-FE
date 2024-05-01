@@ -58,8 +58,7 @@ struct FavouriteItem: View {
 
 struct WardrobeView: View {
     @ObservedObject var viewModel = ItemsViewModel() //observedObject to track changes
-//    @State private var currentIsFavouriteID: String?
-//    @State private var favouriteItemIDs: Set<String> = [] // State to track favorited item IDs
+
     
     let itemService = ItemService() // Initialize the service
     
@@ -93,88 +92,8 @@ struct WardrobeView_Previews: PreviewProvider {
         WardrobeView()
     }
 }
-//#Preview {
-//    WardrobeView()
-//}
-
-//viewModel.fetchItems() //fetch items when the view appears
-// When items are fetched, update the set of favorite item IDs
-/*favouriteItemIDs = Set(viewModel.items.filter { $0.favourite }.map { $0.id })*/ // Set containing favorited item IDs
-
-//struct WardrobeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WardrobeView()
-//        }
-//    }
 
 
-//struct WardrobeView: View {
-//    @ObservedObject var viewModel = ItemsViewModel() //observedObject to track changes
-//
-//    @State private var currentIsFavouriteID: UUID?
-//
-//    var body: some View {
-////        List(selection: viewModel.items){
-////            item in
-////
-////            VStack(alignment: .leading) {
-////                Text("Name: \(item.name)")
-////                Text("Category: \(item.category)")
-////                Text("Tags: \(item.tags.joined(separator: ", "))")
-////                FavouriteItem(itemID: item.id, currentIsFavouriteID: $currentIsFavouriteID)
-////            }
-////        }
-//
-//
-////        List(selection: $viewModel.items) { item in
-////            HStack {
-////                if let uiImage = displayImage(base64String: item.image) {
-////
-////                    //convert the image which is a string into a UIimage
-////                    Image(uiImage: item.Image)
-////                        .resizable()
-////                        .scaledToFit()
-////                        .frame(width: 50, height: 50)
-////                }
-////                VStack(alignment: .leading) {
-////                    Text("Name: \(item.name)")
-////                    Text("Category: \(item.category)")
-////                    Text("Tags: \(item.tags.joined(separator: ", "))")
-////                    FavouriteItem(itemID: item.id, currentIsFavouriteID: $currentIsFavouriteID)
-////                }
-////
-////
-////            }
-////        }
-//
-//        .onAppear {
-//            viewModel.fetchItems() //fetch items when the view appears
-//
-//        }
-//    }
-//    //}
-//}
-//
 
-//struct FavouriteItem: View {
-//    let itemID: String
-//    @Binding var currentIsFavouriteID: [(String, Bool)] = []
-//    // favourites should be an array
-//    // if the item id is in the array then heart should be filled
-//    var body: some View {
-//        Button(action: {
-//            if currentIsFavouriteID.contains(where: <#T##((String, Bool)) throws -> Bool#>) {
-//                currentIsFavouriteID = nil
-//            } else {
-//                currentIsFavouriteID = itemID
-//            }
-//        }) {
-//            Image(systemName: currentIsFavouriteID == itemID ? "heart.fill" : "heart")
-//                .foregroundColor(currentIsFavouriteID == itemID ? .red : .gray)
-//                            .padding()
-//        }
-//    }
-//
-//}
 
-//                    FavouriteItem(itemID: item.id, currentIsFavouriteID: $currentIsFavouriteID, itemService: itemService)
+
