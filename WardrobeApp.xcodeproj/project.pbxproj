@@ -15,6 +15,10 @@
 		B1A4B28C2BDA72D400120764 /* ItemServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */; };
 		B1A4B28E2BDA730600120764 /* ItemsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28D2BDA730600120764 /* ItemsServices.swift */; };
 		B1A4B2902BDA73EB00120764 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4B28F2BDA73EB00120764 /* AddItemView.swift */; };
+		B1A508652BE22E6100588C8E /* OutfitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A508642BE22E6100588C8E /* OutfitsViewModel.swift */; };
+		B1A647CF2BE105BC00CF3E2E /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A647CE2BE105BC00CF3E2E /* Outfit.swift */; };
+		B1A647D12BE105E700CF3E2E /* OutfitServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A647D02BE105E700CF3E2E /* OutfitServiceProtocol.swift */; };
+		B1A647D32BE105FF00CF3E2E /* OutfitsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A647D22BE105FF00CF3E2E /* OutfitsServices.swift */; };
 		B1AA45F72BDF93B600EAD569 /* WardrobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */; };
 		B1AA45F92BDF940C00EAD569 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */; };
 		B1AA45FD2BDFAECC00EAD569 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA45FC2BDFAECC00EAD569 /* ItemsViewModel.swift */; };
@@ -56,6 +60,10 @@
 		B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemServiceProtocol.swift; sourceTree = "<group>"; };
 		B1A4B28D2BDA730600120764 /* ItemsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsServices.swift; sourceTree = "<group>"; };
 		B1A4B28F2BDA73EB00120764 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		B1A508642BE22E6100588C8E /* OutfitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsViewModel.swift; sourceTree = "<group>"; };
+		B1A647CE2BE105BC00CF3E2E /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
+		B1A647D02BE105E700CF3E2E /* OutfitServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitServiceProtocol.swift; sourceTree = "<group>"; };
+		B1A647D22BE105FF00CF3E2E /* OutfitsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsServices.swift; sourceTree = "<group>"; };
 		B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeView.swift; sourceTree = "<group>"; };
 		B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		B1AA45FC2BDFAECC00EAD569 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +178,7 @@
 				B1AA45F62BDF93B600EAD569 /* WardrobeView.swift */,
 				B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */,
 				B1AA45FC2BDFAECC00EAD569 /* ItemsViewModel.swift */,
+				B1A508642BE22E6100588C8E /* OutfitsViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +188,7 @@
 			children = (
 				B1AFB6662BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift */,
 				B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */,
+				B1A647D02BE105E700CF3E2E /* OutfitServiceProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -188,6 +198,7 @@
 			children = (
 				B1AFB6682BD7EE13007458E3 /* Authentication.swift */,
 				B1A4B28D2BDA730600120764 /* ItemsServices.swift */,
+				B1A647D22BE105FF00CF3E2E /* OutfitsServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 			children = (
 				B1AFB6642BD7ED4E007458E3 /* User.swift */,
 				B1A4B2892BDA72A900120764 /* Item.swift */,
+				B1A647CE2BE105BC00CF3E2E /* Outfit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +347,7 @@
 				B1A4B28A2BDA72A900120764 /* Item.swift in Sources */,
 				B1AFB6392BD7EB08007458E3 /* ContentView.swift in Sources */,
 				B1AFB6672BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift in Sources */,
+				B1A647D32BE105FF00CF3E2E /* OutfitsServices.swift in Sources */,
 				B1A4B2902BDA73EB00120764 /* AddItemView.swift in Sources */,
 				B1AFB6372BD7EB08007458E3 /* WardrobeAppApp.swift in Sources */,
 				B1A4B28C2BDA72D400120764 /* ItemServiceProtocol.swift in Sources */,
@@ -344,8 +357,11 @@
 				B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */,
 				B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */,
 				B1AA45F72BDF93B600EAD569 /* WardrobeView.swift in Sources */,
+				B1A508652BE22E6100588C8E /* OutfitsViewModel.swift in Sources */,
+				B1A647CF2BE105BC00CF3E2E /* Outfit.swift in Sources */,
 				B1AA45FD2BDFAECC00EAD569 /* ItemsViewModel.swift in Sources */,
 				B1AA45F92BDF940C00EAD569 /* FavouritesView.swift in Sources */,
+				B1A647D12BE105E700CF3E2E /* OutfitServiceProtocol.swift in Sources */,
 				B1AFB6652BD7ED4E007458E3 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,13 @@ struct DashboardView: View {
     @State private var createOptions = ""
     @State private var showCriteria = false
     @State private var selectedCriteria: Set<String> = []
+    @State private var occasion = ""
+    @State private var weather = ""
+    @State private var clearFields = false
+    @State private var outfitCreated: [String] = []
+    @State private var top = "1"
+    @State private var bottom = "2"
+    @State private var shoes = "3"
     let listOfCriteria = [
         ["title": "occasion", "listOfCriteria": ["casual", "smart", "sporty", "partywear"]],
         ["title": "weather", "listOfCriteria": ["summer", "winter", "rainy", "warm"]]
@@ -65,7 +72,31 @@ struct DashboardView: View {
                         }
                     }
                 }
+                Button(action:  {
+                    occasion = Array(selectedCriteria)[0]
+                    weather = Array(selectedCriteria)[1]
+                    Task {
+                        do {
+                            let outfitService = OutfitService()
+                            try await outfitService.createOutfitByTag(occasion: occasion, weather: weather)
+                            clearFields = true
+//                            outfitCreated = try await outfitService.fetchOutfitCreated()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }) {
+                    Text("Create outfit")
+                }
+                .onChange(of: clearFields) { value in
+                    if value {
+                        selectedCriteria = []
+                        clearFields = false
+                    }
+                }
             } else if createOptions == "Pick your items" {
+//                let outfitService = OutfitService()
+//                try await outfitService.createOutfitManually(top: top, bottom: bottom, shoes: shoes)
                 WardrobeView()
             }
         }

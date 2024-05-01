@@ -124,6 +124,7 @@ class ItemService : ItemServiceProtocol {
         }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     
+
         let jsonData = try JSONSerialization.data(withJSONObject: payload)
         request.httpBody = jsonData
     
@@ -138,7 +139,6 @@ class ItemService : ItemServiceProtocol {
         } else {
             throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode) when signing up. Expected 200"])
         }
-        
     }
     
 
