@@ -125,7 +125,7 @@ struct AddItemView: View {
                                 Task {
                                     do {
                                         let itemService = ItemService()
-                                            try await itemService.createItem(name: itemName, category: itemCategory, image: imageConverted, tags: Array(selectedCriteria))
+                                        try await itemService.createItem(name: itemName, category: itemCategory.lowercased(), image: imageConverted, tags: Array(selectedCriteria))
                                         isItemAdded = true
                                         clearFields = true
                                     } catch {

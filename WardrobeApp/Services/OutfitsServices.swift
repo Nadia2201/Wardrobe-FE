@@ -1,26 +1,25 @@
 //
-//  ItemsServices.swift
+//  OutfitsServices.swift
 //  WardrobeApp
 //
-//  Created by Nadia Bourial on 25/04/2024.
+//  Created by Nadia Bourial on 30/04/2024.
 //
 
 import Foundation
-import UIKit
 
-class ItemService : ItemServiceProtocol {
+class OutfitService : OutfitServiceProtocol {
     
-    
-    private var items: [Item] = []
-    struct ItemResponse: Decodable {
-        let items: [Item]
+    private var outfits: [Outfit] = []
+    struct OutfitResponse: Decodable {
+        let outfits: [Outfit]
         let token: String
     }
     
-
-    static let shared = ItemService()
-    func fetchItems(completion: @escaping ([Item]) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/items") else {
+    
+    static let shared = OutfitService()
+    
+    func fetchOutfitCreated(completion: @escaping (Outfit?) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/outfits") else {
             print("Invalid URL")
             return
         }
@@ -48,7 +47,7 @@ class ItemService : ItemServiceProtocol {
                     } else {
                         print("Network error", error.localizedDescription)
                              }
-                             completion([])
+                             completion(nil)
                              return
                          }
 
@@ -59,33 +58,36 @@ class ItemService : ItemServiceProtocol {
             }
 
             do {
-                let decodedResponse = try JSONDecoder().decode([Item].self, from: data)
+                let decodedResponse = try JSONDecoder().decode([Outfit].self, from: data)
                 // Update token in UserDefaults with the new token received from backend
 //                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
 //                print("UPDATED TOKEN BELOW")
-                
+                let outfitsSortedByCreationTime = decodedResponse.sorted { $0.createdAt > $1.createdAt }
+                if let lastOutfitCreated = outfitsSortedByCreationTime.first {
                 DispatchQueue.main.async {
-                    completion(decodedResponse)
+                    completion(lastOutfitCreated)
+                }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
                 }
                 print("decoded response:")
                 print(decodedResponse)
+
             } catch {
                 print("Error decoding JSON: \(error)")
             }
         }.resume()
     }
     
-    func createItem(name: String, category: String, image: String, tags: [String]) async throws -> Void {
-
-        let payload: [String: Any] = [
-            "name": name,
-            "category": category,
-            "image": image,
-            "tags": tags
-        ]
+    
+    
+    
+    func createOutfitByTag(occasion: String, weather: String) async throws -> Void {
+        let payload: [String: String] = ["occasion": occasion, "weather": weather]
         print(payload)
-        let url = URL(string: "http://localhost:3000/items")!
-
+        let url = URL(string: "http://localhost:3000/outfits/createByTag")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -106,14 +108,35 @@ class ItemService : ItemServiceProtocol {
             print("status code 201")
             return
         } else {
-          throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode) when signing up. Expected 201"])
+            throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode). Expected 201"])
         }
-      }
+    }
     
-    
-    func favouriteItem(item: Item, completion: @escaping (Bool) -> Void) {
-                // Toggle the favorite status
-//        let newFavoriteStatus = !item.favourite
-      
+    func createOutfitManually(top: String, bottom: String, shoes: String) async throws -> Void {
+        let payload: [String: String] = ["top": top, "bottom": bottom, "shoes": shoes]
+        print(payload)
+        let url = URL(string: "http://localhost:3000/outfits/createManual")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+                print("Token not found")
+                return
+            }
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let jsonData = try JSONSerialization.data(withJSONObject: payload)
+        request.httpBody = jsonData
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+          throw NSError(domain: "InvalidResponse", code: 0, userInfo: nil)
+        }
+        if httpResponse.statusCode == 201 {
+            print("status code 201")
+            return
+        } else {
+            throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode). Expected 201"])
+        }
     }
 }
