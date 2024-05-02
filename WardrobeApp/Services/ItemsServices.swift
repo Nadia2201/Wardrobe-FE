@@ -70,6 +70,15 @@ class ItemService : ItemServiceProtocol {
         }.resume()
     }
     
+    // Fetch only favorite items
+//    func fetchFavoriteItems(completion: @escaping ([Item]) -> Void) {
+//        fetchItems { [weak self] fetchedItems in
+//            print(fetchedItems)
+//            self?.items = fetchedItems.filter { $0.favourite == true }
+//        }
+//    }
+    
+    
     func createItem(name: String, category: String, image: String, tags: [String]) async throws -> Void {
         
         let payload: [String: Any] = [
@@ -84,10 +93,12 @@ class ItemService : ItemServiceProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
             print("Token not found")
             return
         }
+        
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         let jsonData = try JSONSerialization.data(withJSONObject: payload)
         request.httpBody = jsonData
@@ -140,6 +151,7 @@ class ItemService : ItemServiceProtocol {
             throw NSError(domain: "HTTPError", code: httpResponse.statusCode, userInfo: ["message": "Received status \(httpResponse.statusCode) when signing up. Expected 200"])
         }
     }
+    
     
 
     
