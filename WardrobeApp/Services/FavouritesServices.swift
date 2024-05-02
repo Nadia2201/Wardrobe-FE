@@ -9,7 +9,7 @@ import Foundation
 
 class FavouritesService : FavouritesProtocol {
     
-    // might need to add variables but dont know what
+    
     
     
     static let shared = FavouritesService()

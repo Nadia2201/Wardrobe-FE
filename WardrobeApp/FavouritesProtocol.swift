@@ -9,5 +9,5 @@ import Foundation
 
 public protocol FavouritesProtocol {
     func fetchFavourites(completion: @escaping ([Item]) -> Void) -> Void
-    //func fetchFavOutfits
+    
 }
