@@ -10,39 +10,37 @@ import SwiftUI
 struct DisplayOutfits: View {
     @ObservedObject var viewModel = OutfitsViewModel() //observedObject to track changes
     
-    
-    let itemService = OutfitService() // Initialize the service
-    
-    var body: some View {
-        List(viewModel.outfits) { outfit in
-            HStack {
-//                if let image = item.uiImage {
-//                    Image(uiImage: image)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 50, height: 50) //adjust as needed
-//                }
-                VStack(alignment: .leading) {
-                    Text("Top: \(outfit.top)")
-                    Text("Bottom: \(outfit.bottom)")
-                    Text("Shoes: \(outfit.shoes)")
+    let outfit: Outfit // The outfit object with the details to display
 
-                    // Pass the correct Binding and ItemService to FavouriteItem
-//                    FavouriteItem(itemID: item.id, currentIsFavouriteID: .constant(item.favourite ? item.id : nil), itemService: itemService, refreshAction: {
-//                        viewModel.fetchItems() // Refresh items after update
-//                    })
-                    
-                }
-            }
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Top: \(outfit.top)")
+            Text("Bottom: \(outfit.bottom)")
+            Text("Shoes: \(outfit.shoes)")
         }
-        .onAppear{
-            viewModel.fetchOutfitCreated()
-        }
+        
     }
 }
 
+// Date formatter for 'createdAt' field
+private let outfitDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // ISO 8601 date format
+    return formatter
+}()
+
+
 struct DisplayOutfits_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayOutfits()
+        let sampleOutfit = Outfit(
+        id: "12345",
+        top: "T-shirt",
+        bottom: "Jeans",
+        shoes: "Sneakers",
+        favourite: true,
+        createdAt: Date()
+        )
+        
+        DisplayOutfits(outfit: sampleOutfit)
     }
 }

@@ -9,6 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isLoggedIn = true
+   
+    let defaultOutfit = Outfit(
+            id: "12345",
+            top: "Sample Top",
+            bottom: "Sample Bottom",
+            shoes: "Sample Shoes",
+            favourite: true,
+            createdAt: Date() // Provide a valid Date
+        )
+    
     var body: some View {
         TabView {
                 DashboardView()
@@ -21,7 +31,7 @@ struct ContentView: View {
                         Image(systemName: "hanger")
                         Text("My wardrobe")
                     }
-                DisplayOutfits()
+            DisplayOutfits(outfit: defaultOutfit)
                     .tabItem {
                         Image(systemName: "tshirt")
                         Text("My outfits")
