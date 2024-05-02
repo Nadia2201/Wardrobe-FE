@@ -62,7 +62,6 @@ struct CreateRandomOutfitView: View {
                                     Image(systemName: isSelected ? "circle.fill" : "circle")
                                         .foregroundColor(isSelected ? .black : .gray) // Change color based on selection
                                     
-                                    
                                 }
                             }
                         }
@@ -100,6 +99,17 @@ struct CreateRandomOutfitView: View {
                 )
             }
             .disabled(selectedOccasion == nil || selectedWeather == nil || selectedOccasion!.isEmpty || selectedWeather!.isEmpty) // Disable the button if criteria are not met
+            
+            // NavigationLink only when generatedOutfit is non-optional
+            if let outfit = generatedOutfit { // Safe optional binding
+                
+//                NavigationLink(
+//                    destination: DisplayOutfits(outfit: outfit), // Navigate to OutfitView
+//                    isActive: $navigateToOutfit // Control navigation
+//                ) {
+//                    EmptyView() // Invisible NavigationLink
+//                }
+            }
         }
     }
 }

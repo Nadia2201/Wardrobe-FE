@@ -10,12 +10,20 @@ import UIKit
 
 public struct Outfit: Decodable, Identifiable {
     public let id: String //unique identifier
-    var top: String
-    var bottom : String
-    var shoes: String
-    var favourite: Bool
-    var createdAt: Date
+    public var top: String
+    public var bottom : String
+    public var shoes: String
+    public var favourite: Bool
+    public var createdAt: Date
     
+    public init(id: String, top: String, bottom: String, shoes: String, favourite: Bool, createdAt: Date) {
+            self.id = id
+            self.top = top
+            self.bottom = bottom
+            self.shoes = shoes
+            self.favourite = favourite
+            self.createdAt = createdAt
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id
