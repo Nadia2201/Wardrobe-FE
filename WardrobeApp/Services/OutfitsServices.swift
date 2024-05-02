@@ -79,6 +79,66 @@ class OutfitService : OutfitServiceProtocol {
         }.resume()
     }
     
+    enum NetworkError: Error {
+        case invalidURL
+        case tokenNotFound
+        case requestTimedOut
+        case noData
+    }
+    
+    func fetchOutfitById(itemId: String, completion: @escaping (Result<Item, Error>) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/items/\(itemId)") else {
+            print("Invalid URL")
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.timeoutInterval = 30
+        
+        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+            print("Token not found")
+            completion(.failure(NetworkError.tokenNotFound))
+            return
+        }
+        
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        print("OLD TOKEN BELOW")
+        print(token)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                if (error as NSError).domain == NSURLErrorDomain, (error as NSError).code == NSURLErrorTimedOut {
+                    print("Request timed out")
+                    completion(.failure(NetworkError.requestTimedOut))
+                } else {
+                    print("Network error", error.localizedDescription)
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            guard let data = data else {
+                print("No data returned")
+                completion(.failure(NetworkError.noData))
+                return
+            }
+
+            do {
+                let decodedResponse = try JSONDecoder().decode(Item.self, from: data)
+                print("UPDATED TOKEN BELOW")
+                DispatchQueue.main.async {
+                    completion(.success(decodedResponse))
+                }
+                print("decoded response:")
+                print(decodedResponse)
+            } catch {
+                print("Error decoding JSON: \(error)")
+                completion(.failure(error))
+            }
+        }.resume()
+    }
     
     func createOutfitByTag(occasion: String, weather: String) async throws -> Outfit {
         
