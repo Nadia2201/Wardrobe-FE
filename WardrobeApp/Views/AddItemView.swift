@@ -45,11 +45,11 @@ struct AddItemView: View {
     
     var body: some View {
             VStack {
-                Image("StyleSyncLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                    .accessibilityIdentifier("style-sync-logo")
+//                Image("StyleSyncLogo")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 150, height: 150)
+//                    .accessibilityIdentifier("style-sync-logo")
                 Text("Add a new clothing item to your wardrobe")
                     .padding()
                 

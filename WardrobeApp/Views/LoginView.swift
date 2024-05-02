@@ -41,6 +41,8 @@ struct LoginView: View {
                             case .success(let token):
                                 self.token = token
                                 self.loggedIn = true 
+                                self.user.email = ""
+                                self.user.password = ""
                             case .failure(let error):
                                 self.errorMessage = error.localizedDescription
                             }

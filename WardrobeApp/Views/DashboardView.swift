@@ -32,7 +32,7 @@ struct DashboardView: View {
             Image("StyleSyncLogo")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 200, height: 200)
+                .frame(width: 100, height: 100)
                 .accessibilityIdentifier("style-sync-logo")
             Text("Welcome to your wardrobe \(username)!")
                 .padding()

@@ -36,7 +36,7 @@ struct ContentView: View {
                         Image(systemName: "heart")
                         Text("Favourites")
                     }
-                LoginView()
+                HomePageView()
                     .tabItem {
                         Image(systemName: "door.left.hand.open")
                         Text("Logout")
