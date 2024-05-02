@@ -18,6 +18,8 @@ struct DashboardView: View {
     @State private var top = "1"
     @State private var bottom = "2"
     @State private var shoes = "3"
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
     let listOfCriteria = [
         ["title": "occasion", "listOfCriteria": ["casual", "smart", "sporty", "partywear"]],
         ["title": "weather", "listOfCriteria": ["summer", "winter", "rainy", "warm"]]
@@ -36,7 +38,7 @@ struct DashboardView: View {
                 .padding()
             Text("Create a new outfit")
             Picker("CreateOption", selection: $createOptions) {
-                ForEach(["Customized", "Random", "Pick your items"], id: \.self) {
+                ForEach(["Customized", "Pick your items"], id: \.self) {
                     Text($0)
                 }
             }
@@ -80,6 +82,8 @@ struct DashboardView: View {
                             let outfitService = OutfitService()
                             try await outfitService.createOutfitByTag(occasion: occasion, weather: weather)
                             clearFields = true
+                            showingAlert = true
+                            alertMessage = "Added to your Outfits"
 //                            outfitCreated = try await outfitService.fetchOutfitCreated()
                         } catch {
                             print(error.localizedDescription)
@@ -94,10 +98,13 @@ struct DashboardView: View {
                         clearFields = false
                     }
                 }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Outfit Added"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
             } else if createOptions == "Pick your items" {
 //                let outfitService = OutfitService()
 //                try await outfitService.createOutfitManually(top: top, bottom: bottom, shoes: shoes)
-                WardrobeView()
+                CreateOutfitManually()
             }
         }
     }

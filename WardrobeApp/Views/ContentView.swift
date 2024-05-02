@@ -21,6 +21,11 @@ struct ContentView: View {
                         Image(systemName: "hanger")
                         Text("My wardrobe")
                     }
+                DisplayOutfits()
+                    .tabItem {
+                        Image(systemName: "tshirt")
+                        Text("My outfits")
+                    }
                 AddItemView()
                     .tabItem {
                         Image(systemName: "plus")
