@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048FB4902BE2C0690051C2F2 /* CreateRandomOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB48F2BE2C0690051C2F2 /* CreateRandomOutfitView.swift */; };
+		049601CD2BE298C600ED2072 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049601CC2BE298C600ED2072 /* FavouritesViewModel.swift */; };
+		049601CF2BE2990D00ED2072 /* FavouritesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049601CE2BE2990D00ED2072 /* FavouritesServices.swift */; };
+		049601D12BE29A3D00ED2072 /* FavouritesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049601D02BE29A3D00ED2072 /* FavouritesProtocol.swift */; };
+		04AE1C002BE38CC9006C53C9 /* OutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE1BFF2BE38CC9006C53C9 /* OutfitView.swift */; };
 		B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B62BD9033F0023A558 /* HomePageView.swift */; };
 		B10F77B92BD90BF90023A558 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77B82BD90BF90023A558 /* SignUpView.swift */; };
 		B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F77BA2BD9106D0023A558 /* LoginView.swift */; };
@@ -52,6 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048FB48F2BE2C0690051C2F2 /* CreateRandomOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRandomOutfitView.swift; sourceTree = "<group>"; };
+		049601CC2BE298C600ED2072 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
+		049601CE2BE2990D00ED2072 /* FavouritesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesServices.swift; sourceTree = "<group>"; };
+		049601D02BE29A3D00ED2072 /* FavouritesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProtocol.swift; sourceTree = "<group>"; };
+		04AE1BFF2BE38CC9006C53C9 /* OutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitView.swift; sourceTree = "<group>"; };
 		B10F77B62BD9033F0023A558 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		B10F77B82BD90BF90023A558 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B10F77BA2BD9106D0023A558 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -179,6 +189,9 @@
 				B1AA45F82BDF940C00EAD569 /* FavouritesView.swift */,
 				B1AA45FC2BDFAECC00EAD569 /* ItemsViewModel.swift */,
 				B1A508642BE22E6100588C8E /* OutfitsViewModel.swift */,
+				049601CC2BE298C600ED2072 /* FavouritesViewModel.swift */,
+				048FB48F2BE2C0690051C2F2 /* CreateRandomOutfitView.swift */,
+				04AE1BFF2BE38CC9006C53C9 /* OutfitView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +202,7 @@
 				B1AFB6662BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift */,
 				B1A4B28B2BDA72D400120764 /* ItemServiceProtocol.swift */,
 				B1A647D02BE105E700CF3E2E /* OutfitServiceProtocol.swift */,
+				049601D02BE29A3D00ED2072 /* FavouritesProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -199,6 +213,7 @@
 				B1AFB6682BD7EE13007458E3 /* Authentication.swift */,
 				B1A4B28D2BDA730600120764 /* ItemsServices.swift */,
 				B1A647D22BE105FF00CF3E2E /* OutfitsServices.swift */,
+				049601CE2BE2990D00ED2072 /* FavouritesServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -345,6 +360,7 @@
 			files = (
 				B1A4B28E2BDA730600120764 /* ItemsServices.swift in Sources */,
 				B1A4B28A2BDA72A900120764 /* Item.swift in Sources */,
+				049601D12BE29A3D00ED2072 /* FavouritesProtocol.swift in Sources */,
 				B1AFB6392BD7EB08007458E3 /* ContentView.swift in Sources */,
 				B1AFB6672BD7EDF0007458E3 /* AuthenticationServiceProtocol.swift in Sources */,
 				B1A647D32BE105FF00CF3E2E /* OutfitsServices.swift in Sources */,
@@ -352,9 +368,13 @@
 				B1AFB6372BD7EB08007458E3 /* WardrobeAppApp.swift in Sources */,
 				B1A4B28C2BDA72D400120764 /* ItemServiceProtocol.swift in Sources */,
 				B10F77B92BD90BF90023A558 /* SignUpView.swift in Sources */,
+				048FB4902BE2C0690051C2F2 /* CreateRandomOutfitView.swift in Sources */,
+				049601CF2BE2990D00ED2072 /* FavouritesServices.swift in Sources */,
 				B10F77BD2BD91DE30023A558 /* DashboardView.swift in Sources */,
 				B1AFB6692BD7EE13007458E3 /* Authentication.swift in Sources */,
+				049601CD2BE298C600ED2072 /* FavouritesViewModel.swift in Sources */,
 				B10F77B72BD9033F0023A558 /* HomePageView.swift in Sources */,
+				04AE1C002BE38CC9006C53C9 /* OutfitView.swift in Sources */,
 				B10F77BB2BD9106D0023A558 /* LoginView.swift in Sources */,
 				B1AA45F72BDF93B600EAD569 /* WardrobeView.swift in Sources */,
 				B1A508652BE22E6100588C8E /* OutfitsViewModel.swift in Sources */,
