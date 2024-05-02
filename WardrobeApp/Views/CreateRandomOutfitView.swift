@@ -62,7 +62,6 @@ struct CreateRandomOutfitView: View {
                                     Image(systemName: isSelected ? "circle.fill" : "circle")
                                         .foregroundColor(isSelected ? .black : .gray) // Change color based on selection
                                     
-                                    
                                 }
                             }
                         }
