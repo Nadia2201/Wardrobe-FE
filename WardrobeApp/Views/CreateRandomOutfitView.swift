@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import UIKit
 
 struct CreateRandomOutfitView: View {
     @State private var selectedCriteria: Set<String> = []
@@ -20,7 +21,12 @@ struct CreateRandomOutfitView: View {
     @State private var showAlert = false // State to manage alerts
     @State private var navigateToOutfit = false // State variable to control navigation
     @State private var generatedOutfit: Outfit? // The generated outfit
-        
+    @State private var topId = ""
+    @State private var bottomId = ""
+    @State private var shoesId = ""
+    @State private var fetchedItem: Item?
+    @State private var fetchedItemBottom: Item?
+    @State private var fetchedItemShoes: Item?
     var body: some View {
         VStack {
             Image("StyleSyncLogo")
@@ -83,12 +89,66 @@ struct CreateRandomOutfitView: View {
                             
                             generatedOutfit = outfit // Store the generated outfit
                             navigateToOutfit = true // Trigger navigation
-                        } catch {
-                            print("Error generating outfit", error.localizedDescription)
-                        }
-                    }
-                } else {
-                    showAlert = true
+                            topId = generatedOutfit?.top ?? ""
+                            bottomId = generatedOutfit?.bottom ?? ""
+                            shoesId = generatedOutfit?.shoes ?? ""
+                            print(topId)
+                            let service = OutfitService()
+//                            try await service.fetchOutfitById(itemId: topId) { result in
+//                                                switch result {
+//                                                case .success(let item):
+//                                                    print("Item fetched successfully:", item)
+//                                                    fetchedItem = item
+//                                                    print("this is the generated image:")
+//                                                    print(fetchedItem?.image)
+//                                                    if let fetchedItem = fetchedItem,
+//                                                        let imageData = Data(base64Encoded: fetchedItem.image),
+//                                                        let uiImage = UIImage(data: imageData) {
+//                                                        Image(uiImage: uiImage)
+//                                                            .resizable()
+//                                                            .scaledToFit()
+//                                                            .frame(width: 150, height: 150)
+//                                                                }
+//                                                case .failure(let error):
+//                                                    print("Error fetching item:", error)
+//                                                }
+//                                            }
+                            // Fetch top item
+                            // Fetch top item
+                                            try await outfitService.fetchOutfitById(itemId: topId) { result in
+                                                switch result {
+                                                case .success(let topItem):
+                                                    fetchedItem = topItem
+                                                case .failure(let error):
+                                                    print("Error fetching top item:", error)
+                                                }
+                                            }
+                                            
+                                            // Fetch bottom item
+                                            try await outfitService.fetchOutfitById(itemId: bottomId) { result in
+                                                switch result {
+                                                case .success(let bottomItem):
+                                                    fetchedItemBottom = bottomItem
+                                                case .failure(let error):
+                                                    print("Error fetching bottom item:", error)
+                                                }
+                                            }
+                                            
+                                            // Fetch shoes item
+                                            try await outfitService.fetchOutfitById(itemId: shoesId) { result in
+                                                switch result {
+                                                case .success(let shoesItem):
+                                                    fetchedItemShoes = shoesItem
+                                                case .failure(let error):
+                                                    print("Error fetching shoes item:", error)
+                                                }
+                                            }
+                                        } catch {
+                                            print("Error generating outfit", error.localizedDescription)
+                                        }
+                                    }
+                        } else {
+                            showAlert = true
                 }
             }
             .alert(isPresented: $showAlert) {
@@ -99,9 +159,35 @@ struct CreateRandomOutfitView: View {
                 )
             }
             .disabled(selectedOccasion == nil || selectedWeather == nil || selectedOccasion!.isEmpty || selectedWeather!.isEmpty) // Disable the button if criteria are not met
-            
+            // Display the fetched image
+            if let topItem = fetchedItem,
+               let topImageData = Data(base64Encoded: topItem.image),
+               let topUIImage = UIImage(data: topImageData),
+               let bottomItem = fetchedItemBottom,
+               let bottomImageData = Data(base64Encoded: bottomItem.image),
+               let bottomUIImage = UIImage(data: bottomImageData),
+               let shoesItem = fetchedItemShoes,
+               let shoesImageData = Data(base64Encoded: shoesItem.image),
+               let shoesUIImage = UIImage(data: shoesImageData) {
+                            
+                            Image(uiImage: topUIImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
+                            
+                            Image(uiImage: bottomUIImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
+                            
+                            Image(uiImage: shoesUIImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
+                        }
+                        
             // NavigationLink only when generatedOutfit is non-optional
-            if let outfit = generatedOutfit { // Safe optional binding
+//            if let outfit = generatedOutfit { // Safe optional binding
                 
 //                NavigationLink(
 //                    destination: DisplayOutfits(outfit: outfit), // Navigate to OutfitView
@@ -109,7 +195,7 @@ struct CreateRandomOutfitView: View {
 //                ) {
 //                    EmptyView() // Invisible NavigationLink
 //                }
-            }
+//            }
         }
     }
 }
