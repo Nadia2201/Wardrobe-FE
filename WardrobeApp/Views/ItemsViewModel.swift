@@ -6,7 +6,8 @@
 //
 
 import Foundation
- import Combine
+import UIKit
+import Combine
 
  class ItemsViewModel: ObservableObject {
      @Published var items: [Item] = [] // observable property to update SwiftUI view
@@ -14,6 +15,7 @@ import Foundation
 
      init() {
          fetchItems()
+
      }
 
      func fetchItems() {
@@ -23,6 +25,7 @@ import Foundation
              }
          }
      }
+     
  }
 
 
