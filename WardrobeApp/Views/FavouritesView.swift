@@ -12,7 +12,7 @@ struct FavouritesView: View {
     
         var body: some View {
             ScrollView {
-                VStack { // Added VStack for multiple components
+                VStack {
                     // Display the StyleSyncLogo
                     Image("StyleSyncLogo")
                         .resizable()
@@ -23,7 +23,7 @@ struct FavouritesView: View {
                     Text("Your Favourites")
                         .font(.largeTitle)
                         .italic()
-                    Spacer() // Add space between components
+                    Spacer() 
                     
                     // List of favorite items
                     ForEach(viewModel.favourites) { item in

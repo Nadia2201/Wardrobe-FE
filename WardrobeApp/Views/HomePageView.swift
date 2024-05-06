@@ -48,6 +48,7 @@ struct HomePageView: View {
                             .cornerRadius(10)
                             .accessibilityIdentifier("loginButton")
                     }
+               
                     .navigationBarBackButtonHidden(true)
                 
                 Spacer()

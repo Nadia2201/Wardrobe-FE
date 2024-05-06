@@ -11,7 +11,7 @@ import SwiftUI
 struct WardrobeAppApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            HomePageView()
         }
     }
 }

@@ -29,15 +29,15 @@ struct CreateRandomOutfitView: View {
     @State private var fetchedItemShoes: Item?
     var body: some View {
         VStack {
-            Image("StyleSyncLogo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
-                .accessibilityIdentifier("style-sync-logo")
-            Text("Outfit Generator")
-                .font(.largeTitle).bold().italic()
-                .padding()
-            Spacer()
+//            Image("StyleSyncLogo")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 150, height: 150)
+//                .accessibilityIdentifier("style-sync-logo")
+//            Text("Outfit Generator")
+//                .font(.title).bold().italic()
+////                .padding()
+//            Spacer()
             
             Text("Select tags to choose your outfit!")
                 .font(.subheadline).bold()
@@ -74,7 +74,7 @@ struct CreateRandomOutfitView: View {
                     }
                 }
             }
-            .padding()
+//            .padding()
             Button("Generate Outfit") {
                 if let occasion = selectedOccasion, let weather = selectedWeather, !occasion.isEmpty, !weather.isEmpty {
                     
@@ -169,33 +169,29 @@ struct CreateRandomOutfitView: View {
                let shoesItem = fetchedItemShoes,
                let shoesImageData = Data(base64Encoded: shoesItem.image),
                let shoesUIImage = UIImage(data: shoesImageData) {
-                            
-                            Image(uiImage: topUIImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                            
-                            Image(uiImage: bottomUIImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                            
-                            Image(uiImage: shoesUIImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                        }
-                        
-            // NavigationLink only when generatedOutfit is non-optional
-//            if let outfit = generatedOutfit { // Safe optional binding
-                
-//                NavigationLink(
-//                    destination: DisplayOutfits(outfit: outfit), // Navigate to OutfitView
-//                    isActive: $navigateToOutfit // Control navigation
-//                ) {
-//                    EmptyView() // Invisible NavigationLink
-//                }
-//            }
+                VStack(spacing: 0) {
+                    Image(uiImage: topUIImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .padding(.bottom, 0)
+                        .padding(.top, 0)
+                    
+                    Image(uiImage: bottomUIImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .padding(.bottom, 0)
+                        .padding(.top, 0)
+                    
+                    Image(uiImage: shoesUIImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .padding(.bottom, 0)
+                        .padding(.top, 0)
+                }
+            }
         }
     }
 }

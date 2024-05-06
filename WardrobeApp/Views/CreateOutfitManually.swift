@@ -119,6 +119,38 @@ struct CreateOutfitManually: View {
                 await viewModel.fetchItems()
             }
         }
+        if let topItem = selectedItems.values.first(where: { $0.category == "top" }),
+           let topImageData = Data(base64Encoded: topItem.image),
+           let topUIImage = UIImage(data: topImageData),
+           let bottomItem = selectedItems.values.first(where: { $0.category == "bottom" }),
+           let bottomImageData = Data(base64Encoded: bottomItem.image),
+           let bottomUIImage = UIImage(data: bottomImageData),
+           let shoesItem = selectedItems.values.first(where: { $0.category == "shoes" }),
+           let shoesImageData = Data(base64Encoded: shoesItem.image),
+           let shoesUIImage = UIImage(data: shoesImageData) {
+            VStack(spacing: 0) {
+                Image(uiImage: topUIImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130)
+                    .padding(.bottom, 0)
+                    .padding(.top, 0)
+                
+                Image(uiImage: bottomUIImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130)
+                    .padding(.bottom, 0)
+                    .padding(.top, 0)
+                
+                Image(uiImage: shoesUIImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130)
+                    .padding(.bottom, 0)
+                    .padding(.top, 0)
+            }
+        }
     }
     
     func createOutfit() {
